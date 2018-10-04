@@ -45,29 +45,31 @@ app.post('/alexa' ,(req, res) => {
     platform_original = "twitch";
     stop = false;
 
-    switch(req.body['request']['intent']['name']){
-        case 'startstream':
-            name_original = req.body['request']['intent']['slots']['streamer']['value'] || 'random';
-            platform_original = req.body['request']['intent']['slots']['platform']['value'] || 'twitch';
-            break;
-            
-        case 'AMAZON.StopIntent':
-            stop = true;
-            break;
-            
-        case 'AMAZON.CancelIntent':
-            stop = true;
-            break;
-    }
-    if(!stop){
-        name = marshal_streamer[name_original] || name_original;
-        platform = marshal_platform[platform_original] || platform_original;
+    if(req.body['request']['intent']){
+        switch(req.body['request']['intent']['name']){
+            case 'startstream':
+                name_original = req.body['request']['intent']['slots']['streamer']['value'] || 'random';
+                platform_original = req.body['request']['intent']['slots']['platform']['value'] || 'twitch';
+                break;
+                
+            case 'AMAZON.StopIntent':
+                stop = true;
+                break;
+                
+            case 'AMAZON.CancelIntent':
+                stop = true;
+                break;
+        }
     }
 
     /**
      * Marshal name and platform
      */
-
+    if(!stop){
+        name = marshal_streamer[name_original] || name_original;
+        platform = marshal_platform[platform_original] || platform_original;
+    }
+    
     /**
      * Emit event to client
      */
