@@ -7,10 +7,6 @@ var io = require("socket.io")(server);
 var bodyParser = require('body-parser');
 
 var sockets = {};
-
-var 
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -35,8 +31,8 @@ var marshal_streamer = {
 
 var marshal_platform = {
     'though yu':'douyu',
-    ''
-}
+    
+};
 app.post('/alexa' ,(req, res) => {
     console.log("Alexa post request:");
     console.log(req.body);
@@ -67,7 +63,7 @@ app.post('/alexa' ,(req, res) => {
         name = marshal_streamer[name_original] || name_original;
         platform = marshal_platform[platform_original] || platform_original;
     }
-    
+
     /**
      * Marshal name and platform
      */
