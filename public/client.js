@@ -12,13 +12,17 @@ $(() => {
 
     socket.on('start', (data) => {
         $("#screen").html("");
-        twitch_client = new Twitch.Embed("screen", {
+
+        twitch_client = new Twitch.Player("screen", {
             width:$(window).width(),
             height:$(window).height(),
             channel: data.name,
             layout:'video',
             theme:'dark'
         });
+        twitch_client.play();
+        twitch_client.setMuted(false);
+
     });
 })
 

@@ -104,8 +104,7 @@ app.post('/alexa' ,(req, res) => {
                 "playBehavior": "REPLACE_ENQUEUED"      
               },
               "shouldEndSession": true
-            },
-            "debug":stream_list
+            }
         }
     )
 });
